@@ -1,0 +1,53 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: inference_realesrgan.py - parameter_test",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args":[
+                "--input", "~/data/realesrgan_parameters_test/original/",
+                "--usecpu", "True",
+                "--model_path", "experiments/pretrained_models/RealESRGAN_x2plus.pth",
+                "--outscale", "1",
+                "--output", "~/data/realesrgan_parameters_test/cpu-x2plus-scale1",
+                "--suffix", ""
+            ]
+        },
+        {
+            "name": "Python: inference_realesrgan.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": [ "CUDA_VISIBLE_DEVICES", "0,1"],
+            "args":[
+                "--model_path", "experiments/pretrained_models/RealESRGAN_x2plus.pth",
+                "--input", "/home/ben/data/denoising_sample/insta/dualfisheye/",
+                "--tile", "1200",
+                "--output", "/home/ben/data/denoising_sample/insta/dualfisheye_real_esrgan_result/",
+                "--outscale", "1",
+                "--suffix", ""
+            ]
+        },
+        {
+            "name": "Python: realesrgan/train.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env":{
+                "CUDA_VISIBLE_DEVICES": "0,1"
+            },
+            "args":[
+                "-opt", "options/train_realesrnet_x4plus.yml",
+            ],
+            "justMyCode": false
+        }
+    ]
+}

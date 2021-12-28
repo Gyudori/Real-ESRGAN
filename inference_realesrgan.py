@@ -2,6 +2,7 @@ import argparse
 import cv2
 import glob
 import os
+import time
 from basicsr.archs.rrdbnet_arch import RRDBNet
 
 from realesrgan import RealESRGANer
@@ -35,6 +36,7 @@ def main():
         type=str,
         default='auto',
         help='Image extension. Options: auto | jpg | png, auto means using the same extension as inputs')
+    parser.add_argument('--usecpu', action='store_true', help='True for use cpu in process')
     args = parser.parse_args()
 
     if 'RealESRGAN_x4plus_anime_6B.pth' in args.model_path:
@@ -51,7 +53,8 @@ def main():
         tile=args.tile,
         tile_pad=args.tile_pad,
         pre_pad=args.pre_pad,
-        half=args.half)
+        half=args.half,
+        usecpu=args.usecpu)
 
     if args.face_enhance:
         from gfpgan import GFPGANer
@@ -68,7 +71,11 @@ def main():
     else:
         paths = sorted(glob.glob(os.path.join(args.input, '*')))
 
+    total_start = time.time()
+    print("Start time measure-------------------------------------------")
+    img_count = 0
     for idx, path in enumerate(paths):
+        img_count += 1
         imgname, extension = os.path.splitext(os.path.basename(path))
         print('Testing', idx, imgname)
 
@@ -87,10 +94,17 @@ def main():
             warnings.warn('The input image is small, try X4 model for better performance.')
 
         try:
+            one_img_start = time.time()
             if args.face_enhance:
                 _, _, output = face_enhancer.enhance(img, has_aligned=False, only_center_face=False, paste_back=True)
             else:
                 output, _ = upsampler.enhance(img, outscale=args.outscale)
+
+            one_img_end = time.time()
+            hours, rem = divmod(one_img_end-one_img_start, 3600)
+            minutes, seconds = divmod(rem, 60)
+            print("Done one image | elapsed time:{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
+
         except Exception as error:
             print('Error', error)
             print('If you encounter CUDA out of memory, try to set --tile with a smaller number.')
@@ -101,8 +115,14 @@ def main():
                 extension = args.ext
             if img_mode == 'RGBA':  # RGBA images should be saved in png format
                 extension = 'png'
-            save_path = os.path.join(args.output, f'{imgname}_{args.suffix}.{extension}')
+            save_path = os.path.join(args.output, f'{imgname}{args.suffix}.{extension}')
             cv2.imwrite(save_path, output)
+
+    total_end = time.time()
+    hours, rem = divmod(total_end-total_start, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print(f"Total image count: {img_count}\n")
+    print("Done all images | elapsed time:{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
 
 
 if __name__ == '__main__':
