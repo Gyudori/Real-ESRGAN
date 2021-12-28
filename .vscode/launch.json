@@ -27,10 +27,10 @@
             "console": "integratedTerminal",
             "env": [ "CUDA_VISIBLE_DEVICES", "0,1"],
             "args":[
-                "--model_path", "experiments/pretrained_models/RealESRGAN_x2plus.pth",
-                "--input", "/home/ben/data/denoising_sample/insta/dualfisheye/",
+                "--model_name", "RealESRGAN_x2plus",
+                "--input", "/home/ben/data/denoising_sample/ricoh/dualfisheye/",
                 "--tile", "1200",
-                "--output", "/home/ben/data/denoising_sample/insta/dualfisheye_real_esrgan_result/",
+                "--output", "/home/ben/data/denoising_sample/ricoh/dualfisheye_real_esrgan_result/",
                 "--outscale", "1",
                 "--suffix", ""
             ]

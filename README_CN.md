@@ -10,19 +10,23 @@
 
 [English](README.md) **|** [简体中文](README_CN.md)
 
-1. Real-ESRGAN的[Colab Demo](https://colab.research.google.com/drive/1k2Zod6kSHEvraybHl50Lys0LerhyTMCo?usp=sharing) <a href="https://colab.research.google.com/drive/1k2Zod6kSHEvraybHl50Lys0LerhyTMCo?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>.
-2. **支持Intel/AMD/Nvidia显卡**的绿色版exe文件： [Windows版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-windows.zip) / [Linux版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-ubuntu.zip) / [macOS版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-macos.zip)，详情请移步[这里](#便携版（绿色版）可执行文件)。NCNN的实现在 [Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan)。
+:fire: :fire: :fire: 添加了**针对动漫视频的小模型**, 更多信息在 [anime video models](docs/anime_video_model.md) 中.
 
-感谢大家的关注和使用:-) 关于动漫插画的模型，目前还有很多问题，主要有: 1. 视频处理不了; 2. 景深虚化有问题; 3. 不可调节, 效果过了; 4. 改变原来的风格。大家提供了很好的反馈。这些反馈会逐步更新在 [这个文档](feedback.md)。希望不久之后，有新模型可以使用.
+1. Real-ESRGAN的[Colab Demo](https://colab.research.google.com/drive/1k2Zod6kSHEvraybHl50Lys0LerhyTMCo?usp=sharing) <a href="https://colab.research.google.com/drive/1k2Zod6kSHEvraybHl50Lys0LerhyTMCo?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>.
+2. Real-ESRGAN的 **动漫视频** 的[Colab Demo](https://colab.research.google.com/drive/1yNl9ORUxxlL4N0keJa2SEPB61imPQd1B?usp=sharing) <a href="https://colab.research.google.com/drive/1yNl9ORUxxlL4N0keJa2SEPB61imPQd1B?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>.
+3. **支持Intel/AMD/Nvidia显卡**的绿色版exe文件： [Windows版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-windows.zip) / [Linux版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-ubuntu.zip) / [macOS版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-macos.zip)，详情请移步[这里](#便携版（绿色版）可执行文件)。NCNN的实现在 [Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan)。
 
 Real-ESRGAN 的目标是开发出**实用的图像修复算法**。<br>
 我们在 ESRGAN 的基础上使用纯合成的数据来进行训练，以使其能被应用于实际的图片修复的场景（顾名思义：Real-ESRGAN）。
 
 :art: Real-ESRGAN 需要，也很欢迎你的贡献，如新功能、模型、bug修复、建议、维护等等。详情可以查看[CONTRIBUTING.md](CONTRIBUTING.md)，所有的贡献者都会被列在[此处](README_CN.md#hugs-感谢)。
 
+:milky_way: 感谢大家提供了很好的反馈。这些反馈会逐步更新在 [这个文档](feedback.md)。
+
 :question: 常见的问题可以在[FAQ.md](FAQ.md)中找到答案。（好吧，现在还是空白的=-=||）
 
 :triangular_flag_on_post: **更新**
+- :white_check_mark: 添加了针对动漫视频的小模型, 更多信息在 [anime video models](docs/anime_video_model.md) 中.
 - :white_check_mark: 添加了ncnn 实现：[Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan).
 - :white_check_mark: 添加了 [*RealESRGAN_x4plus_anime_6B.pth*](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth)，对二次元图片进行了优化，并减少了model的大小。详情 以及 与[waifu2x](https://github.com/nihui/waifu2x-ncnn-vulkan)的对比请查看[**anime_model.md**](docs/anime_model.md)
 - :white_check_mark: 支持用户在自己的数据上进行微调 (finetune)：[详情](Training.md#Finetune-Real-ESRGAN-on-your-own-dataset)
@@ -76,21 +80,23 @@ Real-ESRGAN 将会被长期支持，我会在空闲的时间中持续维护更�
 
 ### 便携版（绿色版）可执行文件
 
-你可以下载**支持Intel/AMD/Nvidia显卡**的绿色版exe文件： [Windows版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-windows.zip) / [Linux版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-ubuntu.zip) / [macOS版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-macos.zip)。
+你可以下载**支持Intel/AMD/Nvidia显卡**的绿色版exe文件： [Windows版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-windows.zip) / [Linux版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-ubuntu.zip) / [macOS版](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-macos.zip)。
 
 绿色版指的是这些exe你可以直接运行（放U盘里拷走都没问题），因为里面已经有所需的文件和模型了。它不需要 CUDA 或者 PyTorch运行环境。<br>
 
 你可以通过下面这个命令来运行（Windows版本的例子，更多信息请查看对应版本的README.md）：
 
 ```bash
-./realesrgan-ncnn-vulkan.exe -i 输入图像.jpg -o 输出图像.png
+./realesrgan-ncnn-vulkan.exe -i 输入图像.jpg -o 输出图像.png -n 模型名字
 ```
 
-我们提供了三种模型：
+我们提供了五种模型：
 
 1. realesrgan-x4plus（默认）
 2. reaesrnet-x4plus
 3. realesrgan-x4plus-anime（针对动漫插画图像优化，有更小的体积）
+4. RealESRGANv2-animevideo-xsx2 (针对动漫视频, X2)
+5. RealESRGANv2-animevideo-xsx4 (针对动漫视频, X4)
 
 你可以通过`-n`参数来使用其他模型，例如`./realesrgan-ncnn-vulkan.exe -i 二次元图片.jpg -o 二刺螈图片.png -n realesrgan-x4plus-anime`
 
@@ -162,7 +168,7 @@ wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_
 推断!
 
 ```bash
-python inference_realesrgan.py --model_path experiments/pretrained_models/RealESRGAN_x4plus.pth --input inputs --face_enhance
+python inference_realesrgan.py -n RealESRGAN_x4plus -i inputs --face_enhance
 ```
 
 结果在`results`文件夹
@@ -180,28 +186,27 @@ python inference_realesrgan.py --model_path experiments/pretrained_models/RealES
 # 下载模型
 wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth -P experiments/pretrained_models
 # 推断
-python inference_realesrgan.py --model_path experiments/pretrained_models/RealESRGAN_x4plus_anime_6B.pth --input inputs
+python inference_realesrgan.py -n RealESRGAN_x4plus_anime_6B -i inputs
 ```
 
 结果在`results`文件夹
 
 ### Python 脚本的用法
 
-1. 虽然你实用了 X4 模型，但是你可以 **输出任意尺寸比例的图片**，只要实用了 `outscale` 参数. 程序会进一步对模型的输出图像进行缩放。
+1. 虽然你使用了 X4 模型，但是你可以 **输出任意尺寸比例的图片**，只要实用了 `outscale` 参数. 程序会进一步对模型的输出图像进行缩放。
 
 ```console
-Usage: python inference_realesrgan.py --model_path experiments/pretrained_models/RealESRGAN_x4plus.pth --input infile --output outfile [options]...
+Usage: python inference_realesrgan.py -n RealESRGAN_x4plus -i infile -o outfile [options]...
 
-A common command: python inference_realesrgan.py --model_path experiments/pretrained_models/RealESRGAN_x4plus.pth --input infile --netscale 4 --outscale 3.5 --half --face_enhance
+A common command: python inference_realesrgan.py -n RealESRGAN_x4plus -i infile --outscale 3.5 --half --face_enhance
 
   -h                   show this help
-  --input              Input image or folder. Default: inputs
-  --output             Output folder. Default: results
-  --model_path         Path to the pre-trained model. Default: experiments/pretrained_models/RealESRGAN_x4plus.pth
-  --netscale           Upsample scale factor of the network. Default: 4
-  --outscale           The final upsampling scale of the image. Default: 4
+  -i --input           Input image or folder. Default: inputs
+  -o --output          Output folder. Default: results
+  -n --model_name      Model name. Default: RealESRGAN_x4plus
+  -s, --outscale       The final upsampling scale of the image. Default: 4
   --suffix             Suffix of the restored image. Default: out
-  --tile               Tile size, 0 for no tile during testing. Default: 0
+  -t, --tile           Tile size, 0 for no tile during testing. Default: 0
   --face_enhance       Whether to use GFPGAN to enhance face. Default: False
   --half               Whether to use half precision during inference. Default: False
   --ext                Image extension. Options: auto | jpg | png, auto means using the same extension as inputs. Default: auto
@@ -209,18 +214,7 @@ A common command: python inference_realesrgan.py --model_path experiments/pretra
 
 ## :european_castle: 模型库
 
-- [RealESRGAN_x4plus](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth): X4 model for general images
-- [RealESRGAN_x4plus_anime_6B](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth): Optimized for anime images; 6 RRDB blocks (slightly smaller network)
-- [RealESRGAN_x2plus](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth): X2 model for general images
-- [RealESRNet_x4plus](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.1/RealESRNet_x4plus.pth): X4 model with MSE loss (over-smooth effects)
-
-- [official ESRGAN_x4](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.1/ESRGAN_SRx4_DF2KOST_official-ff704c30.pth): official ESRGAN model (X4)
-
-下面是 **判别器** 模型, 他们经常被用来微调（fine-tune）模型.
-
-- [RealESRGAN_x4plus_netD](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.3/RealESRGAN_x4plus_netD.pth)
-- [RealESRGAN_x2plus_netD](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.3/RealESRGAN_x2plus_netD.pth)
-- [RealESRGAN_x4plus_anime_6B_netD](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B_netD.pth)
+请参见 [docs/model_zoo.md](docs/model_zoo.md)
 
 ## :computer: 训练，在你的数据上微调（Fine-tune）
 

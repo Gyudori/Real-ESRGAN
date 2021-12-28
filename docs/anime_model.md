@@ -1,12 +1,13 @@
-# Anime model
+# Anime Model
 
 :white_check_mark: We add [*RealESRGAN_x4plus_anime_6B.pth*](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth), which is optimized for **anime** images with much smaller model size.
 
-- [How to Use](#How-to-Use)
-  - [PyTorch Inference](#PyTorch-Inference)
-  - [ncnn Executable File](#ncnn-Executable-File)
-- [Comparisons with waifu2x](#Comparisons-with-waifu2x)
-- [Comparisons with Sliding Bars](#Comparions-with-Sliding-Bars)
+- [Anime Model](#anime-model)
+  - [How to Use](#how-to-use)
+    - [PyTorch Inference](#pytorch-inference)
+    - [ncnn Executable File](#ncnn-executable-file)
+  - [Comparisons with waifu2x](#comparisons-with-waifu2x)
+  - [Comparisons with Sliding Bars](#comparisons-with-sliding-bars)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/xinntao/public-figures/master/Real-ESRGAN/cmp_realesrgan_anime_1.png">
@@ -26,12 +27,12 @@ Pre-trained models: [RealESRGAN_x4plus_anime_6B](https://github.com/xinntao/Real
 # download model
 wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth -P experiments/pretrained_models
 # inference
-python inference_realesrgan.py --model_path experiments/pretrained_models/RealESRGAN_x4plus_anime_6B.pth --input inputs
+python inference_realesrgan.py -n RealESRGAN_x4plus_anime_6B -i inputs
 ```
 
 ### ncnn Executable File
 
-Download the latest portable [Windows](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-windows.zip) / [Linux](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-ubuntu.zip) / [MacOS](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/realesrgan-ncnn-vulkan-20210901-macos.zip) **executable files for Intel/AMD/Nvidia GPU**.
+Download the latest portable [Windows](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-windows.zip) / [Linux](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-ubuntu.zip) / [MacOS](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.3.0/realesrgan-ncnn-vulkan-20211212-macos.zip) **executable files for Intel/AMD/Nvidia GPU**.
 
 Taking the Windows as example, run:
 
