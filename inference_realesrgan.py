@@ -8,6 +8,11 @@ from basicsr.archs.rrdbnet_arch import RRDBNet
 from realesrgan import RealESRGANer
 from realesrgan.archs.srvgg_arch import SRVGGNetCompact
 
+def print_elapsed_time(print_messeage, start_time):
+    end_time = time.time()
+    hours, rem = divmod(end_time-start_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print(print_messeage, "| elapsed time:{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
 
 def main():
     """Inference demo for Real-ESRGAN.
@@ -28,7 +33,6 @@ def main():
     parser.add_argument('-t', '--tile', type=int, default=0, help='Tile size, 0 for no tile during testing')
     parser.add_argument('--tile_pad', type=int, default=10, help='Tile padding')
     parser.add_argument('--pre_pad', type=int, default=0, help='Pre padding size at each border')
-    parser.add_argument('--face_enhance', action='store_true', help='Use GFPGAN to enhance face')
     parser.add_argument('--half', action='store_true', help='Use half precision during inference')
     parser.add_argument(
         '--alpha_upsampler',
@@ -51,7 +55,7 @@ def main():
     elif args.model_name in ['RealESRGAN_x4plus_anime_6B']:  # x4 RRDBNet model with 6 blocks
         model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=6, num_grow_ch=32, scale=4)
         netscale = 4
-    elif args.model_name in ['RealESRGAN_x2plus']:  # x2 RRDBNet model
+    elif args.model_name in ['RealESRGAN_x2plus', 'net_g_2x_200k']:  # x2 RRDBNet model
         model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2)
         netscale = 2
     elif args.model_name in [
@@ -64,6 +68,24 @@ def main():
     ]:  # x4 VGG-style model (XS size)
         model = SRVGGNetCompact(num_in_ch=3, num_out_ch=3, num_feat=64, num_conv=16, upscale=4, act_type='prelu')
         netscale = 4
+    else:
+        print('Using custom pretrained model')
+        model_arch = args.model_name.split('_')
+        if model_arch[2] == '1x':
+            scale = 1
+            netscale = 1
+        elif model_arch[2] == '2x':
+            scale = 1
+            netscale = 1
+        else:
+            print('Invalid custom pretrained model')
+        if model_arch[4] == '6B':
+            num_block = 6
+        elif model_arch[4] == '23B':
+            num_block = 23
+        else:
+            print('Invalid custom pretrained model')
+        model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=num_block, num_grow_ch=32, scale=scale)
 
     # determine model paths
     model_path = os.path.join('experiments/pretrained_models', args.model_name + '.pth')
@@ -83,14 +105,6 @@ def main():
         half=args.half,
         usecpu=args.usecpu)
 
-    if args.face_enhance:  # Use GFPGAN for face enhancement
-        from gfpgan import GFPGANer
-        face_enhancer = GFPGANer(
-            model_path='https://github.com/TencentARC/GFPGAN/releases/download/v0.2.0/GFPGANCleanv1-NoCE-C2.pth',
-            upscale=args.outscale,
-            arch='clean',
-            channel_multiplier=2,
-            bg_upsampler=upsampler)
     os.makedirs(args.output, exist_ok=True)
 
     if os.path.isfile(args.input):
@@ -114,15 +128,8 @@ def main():
 
         try:
             one_img_start = time.time()
-            if args.face_enhance:
-                _, _, output = face_enhancer.enhance(img, has_aligned=False, only_center_face=False, paste_back=True)
-            else:
-                output, _ = upsampler.enhance(img, outscale=args.outscale)
-
-            one_img_end = time.time()
-            hours, rem = divmod(one_img_end-one_img_start, 3600)
-            minutes, seconds = divmod(rem, 60)
-            print("Done one image | elapsed time:{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
+            output, _ = upsampler.enhance(img, outscale=args.outscale)
+            print_elapsed_time('Done one image', one_img_start)
 
         except RuntimeError as error:
             print('Error', error)
@@ -137,12 +144,7 @@ def main():
             save_path = os.path.join(args.output, f'{imgname}{args.suffix}.{extension}')
             cv2.imwrite(save_path, output)
 
-    total_end = time.time()
-    hours, rem = divmod(total_end-total_start, 3600)
-    minutes, seconds = divmod(rem, 60)
-    print(f"Total image count: {img_count}\n")
-    print("Done all images | elapsed time:{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
-
+    print_elapsed_time('Done all image', total_start)
 
 if __name__ == '__main__':
     main()

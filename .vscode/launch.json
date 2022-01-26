@@ -5,35 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: inference_realesrgan.py - parameter_test",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "args":[
-                "--input", "~/data/realesrgan_parameters_test/original/",
-                "--usecpu", "True",
-                "--model_path", "experiments/pretrained_models/RealESRGAN_x2plus.pth",
-                "--outscale", "1",
-                "--output", "~/data/realesrgan_parameters_test/cpu-x2plus-scale1",
-                "--suffix", ""
-            ]
-        },
-        {
             "name": "Python: inference_realesrgan.py",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "env": [ "CUDA_VISIBLE_DEVICES", "0,1"],
+            "env": [ "CUDA_VISIBLE_DEVICES", "2"],
             "args":[
-                "--model_name", "RealESRGAN_x2plus",
-                "--input", "/home/ben/data/denoising_sample/ricoh/dualfisheye/",
-                "--tile", "1200",
-                "--output", "/home/ben/data/denoising_sample/ricoh/dualfisheye_real_esrgan_result/",
+                "--model_name", "net_g_2x_200k",
+                // "--input", "/home/ben/data/denoising_sample/ricoh/dualfisheye",
+                "--input", "/home/ben/data/realesrgan_clean_image_test/input",
+                // "--tile", "1200",
+                "--tile", "400",
+                "--tile_pad", "20",
+                // "--output", "/home/ben/data/denoising_sample/ricoh/dualfisheye_real_esrgan_1x_100k_6B_res/",
+                "--output", "/home/ben/data/realesrgan_clean_image_test/results/2x_200k/",
                 "--outscale", "1",
                 "--suffix", ""
-            ]
+            ],
+            "justMyCode": false
         },
         {
             "name": "Python: realesrgan/train.py",
@@ -42,10 +32,11 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "env":{
-                "CUDA_VISIBLE_DEVICES": "0,1"
+                "CUDA_VISIBLE_DEVICES": "0,1,2,3"
             },
             "args":[
-                "-opt", "options/train_realesrnet_x4plus.yml",
+                // "-opt", "options/train_realesrgan_x2plus.yml"
+                "-opt", "options/train_realesrnet_x1plus.yml"
             ],
             "justMyCode": false
         }
