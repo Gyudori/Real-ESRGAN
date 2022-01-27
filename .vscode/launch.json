@@ -32,11 +32,12 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "env":{
-                "CUDA_VISIBLE_DEVICES": "0,1,2,3"
+                "CUDA_VISIBLE_DEVICES": "1"
             },
             "args":[
                 // "-opt", "options/train_realesrgan_x2plus.yml"
-                "-opt", "options/train_realesrnet_x1plus.yml"
+                "-opt", "options/train_realesrnet_x1plus.yml",
+                "--debug"
             ],
             "justMyCode": false
         }
