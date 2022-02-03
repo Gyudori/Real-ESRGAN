@@ -35,9 +35,21 @@
                 "CUDA_VISIBLE_DEVICES": "1"
             },
             "args":[
-                // "-opt", "options/train_realesrgan_x2plus.yml"
-                "-opt", "options/train_realesrnet_x1plus.yml",
-                "--debug"
+                "-opt", "options/train_realesrnet_x1plus_test_hornet.yml"
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "(Windows)Python: realesrgan/train.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env":{
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args":[
+                "-opt", "options/train_realesrnet_x1plus_test_windows.yml"
             ],
             "justMyCode": false
         }
