@@ -12,14 +12,12 @@
             "console": "integratedTerminal",
             "env": [ "CUDA_VISIBLE_DEVICES", "2"],
             "args":[
-                "--model_name", "net_g_2x_200k",
-                // "--input", "/home/ben/data/denoising_sample/ricoh/dualfisheye",
-                "--input", "/home/ben/data/realesrgan_clean_image_test/input",
-                // "--tile", "1200",
-                "--tile", "400",
+                "--model_name", "net_g_1x_100k_6B_realesrnet_original",
+                "--input", "/home/ben/data/realesrgan/test/insta_dualfisheye/",
+                "--tile", "1200",
+                // "--tile", "400",
                 "--tile_pad", "20",
-                // "--output", "/home/ben/data/denoising_sample/ricoh/dualfisheye_real_esrgan_1x_100k_6B_res/",
-                "--output", "/home/ben/data/realesrgan_clean_image_test/results/2x_200k/",
+                "--output", "/home/ben/data/realesrgan/test/insta_dualfisheye/results/1x_100k_6B",
                 "--outscale", "1",
                 "--suffix", ""
             ],
@@ -32,10 +30,12 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "env":{
-                "CUDA_VISIBLE_DEVICES": "1"
+                "CUDA_VISIBLE_DEVICES": "2,3"
             },
             "args":[
-                "-opt", "options/train_realesrnet_x1plus_test_hornet.yml"
+                "-opt", "options/train_realesrnet_x1plus_test_hornet.yml",
+                // "-opt", "options/train_realesrgan_x1plus_test_hornet.yml",
+                // "--debug"
             ],
             "justMyCode": false
         },

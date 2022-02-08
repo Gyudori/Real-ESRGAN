@@ -82,7 +82,10 @@ class RealESRNetModel(SRModel):
 
             # ----------------------- The first degradation process ----------------------- #
             # blur
-            out = filter2D(self.gt, self.kernel1)
+            if np.random.uniform() < self.opt['first_blur_prob']:
+                out = filter2D(self.gt, self.kernel1)
+            else:
+                out = self.gt
             # random resize
             updown_type = random.choices(['up', 'down', 'keep'], self.opt['resize_prob'])[0]
             if updown_type == 'up':
