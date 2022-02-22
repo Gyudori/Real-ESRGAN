@@ -79,12 +79,9 @@ def main():
             netscale = 1
         else:
             print('Invalid custom pretrained model')
-        if model_arch[4] == '6B':
-            num_block = 6
-        elif model_arch[4] == '23B':
-            num_block = 23
-        else:
-            print('Invalid custom pretrained model')
+
+        num_block = int(model_arch[4][:-1])
+
         model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=num_block, num_grow_ch=32, scale=scale)
 
     # determine model paths
@@ -110,7 +107,7 @@ def main():
     if os.path.isfile(args.input):
         paths = [args.input]
     else:
-        paths = sorted(glob.glob(os.path.join(args.input, '*')))
+        paths = sorted(glob.glob(os.path.join(args.input, '*.[jp][pn]g')))
 
     total_start = time.time()
     print("Start time measure-------------------------------------------")

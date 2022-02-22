@@ -52,6 +52,24 @@
                 "-opt", "options/train_realesrnet_x1plus_test_windows.yml"
             ],
             "justMyCode": false
-        }
+        },
+        {
+            "name": "(Windows)Python: inference_realesrgan.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args":[
+                "--model_name", "net_g_1x_100k_6B_realesrnet_degrad_modified5",
+                "--input", "D:/cupix_data/17_image_denoise/dual_fisheye_video/theta/dark_server_room/samples",
+                "--tile", "2000",
+                // "--tile", "400",
+                "--tile_pad", "20",
+                "--output", "D:/cupix_data/17_image_denoise/dual_fisheye_video/theta/dark_server_room/samples/results/realesrnet_degrad_modified5",
+                "--outscale", "1",
+                "--suffix", "\"\""
+            ],
+            "justMyCode": false
+        },
     ]
 }
